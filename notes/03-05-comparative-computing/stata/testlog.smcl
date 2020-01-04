@@ -1,0 +1,192 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst/03-pm-computing/comparative/stata/testlog.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 4 Jan 2020, 10:02:35
+{txt}
+{com}. 
+. cd "/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst/03-pm-computing/comparative/stata"
+{res}/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst/03-pm-computing/comparative/stata
+{txt}
+{com}. 
+. use auto
+{txt}(1978 Automobile Data)
+
+{com}. describe
+
+{txt}Contains data from {res}auto.dta
+{txt}  obs:{res}            74                          1978 Automobile Data
+{txt} vars:{res}            12                          13 Apr 2013 17:45
+{txt} size:{res}         3,182                          (_dta has notes)
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:make           }{txt}{bind: str18   }{bind:{txt}%-18s     }{space 1}{bind:         }{bind:  }{res}{res}Make and Model{p_end}
+{p 0 48}{bind:price          }{txt}{bind: int     }{bind:{txt}%8.0gc    }{space 1}{bind:         }{bind:  }{res}{res}Price{p_end}
+{p 0 48}{bind:mpg            }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Mileage (mpg){p_end}
+{p 0 48}{bind:rep78          }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Repair Record 1978{p_end}
+{p 0 48}{bind:headroom       }{txt}{bind: float   }{bind:{txt}%6.1f     }{space 1}{bind:         }{bind:  }{res}{res}Headroom (in.){p_end}
+{p 0 48}{bind:trunk          }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Trunk space (cu. ft.){p_end}
+{p 0 48}{bind:weight         }{txt}{bind: int     }{bind:{txt}%8.0gc    }{space 1}{bind:         }{bind:  }{res}{res}Weight (lbs.){p_end}
+{p 0 48}{bind:length         }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Length (in.){p_end}
+{p 0 48}{bind:turn           }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Turn Circle (ft.) {p_end}
+{p 0 48}{bind:displacement   }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Displacement (cu. in.){p_end}
+{p 0 48}{bind:gear_ratio     }{txt}{bind: float   }{bind:{txt}%6.2f     }{space 1}{bind:         }{bind:  }{res}{res}Gear Ratio{p_end}
+{p 0 48}{bind:foreign        }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:origin   }{bind:  }{res}{res}Car type{p_end}
+{txt}{hline}
+Sorted by: {res}foreign
+{txt}
+{com}. summarize
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 8}make {c |}{res}          0
+{txt}{space 7}price {c |}{res}         74    6165.257    2949.496       3291      15906
+{txt}{space 9}mpg {c |}{res}         74     21.2973    5.785503         12         41
+{txt}{space 7}rep78 {c |}{res}         69    3.405797    .9899323          1          5
+{txt}{space 4}headroom {c |}{res}         74    2.993243    .8459948        1.5          5
+{txt}{hline 13}{c +}{hline 57}
+{space 7}trunk {c |}{res}         74    13.75676    4.277404          5         23
+{txt}{space 6}weight {c |}{res}         74    3019.459    777.1936       1760       4840
+{txt}{space 6}length {c |}{res}         74    187.9324    22.26634        142        233
+{txt}{space 8}turn {c |}{res}         74    39.64865    4.399354         31         51
+{txt}displacement {c |}{res}         74    197.2973    91.83722         79        425
+{txt}{hline 13}{c +}{hline 57}
+{space 2}gear_ratio {c |}{res}         74    3.014865    .4562871       2.19       3.89
+{txt}{space 5}foreign {c |}{res}         74    .2972973    .4601885          0          1
+{txt}
+{com}. tabulate mpg
+
+    {txt}Mileage {c |}
+      (mpg) {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         12 {c |}{res}          2        2.70        2.70
+{txt}         14 {c |}{res}          6        8.11       10.81
+{txt}         15 {c |}{res}          2        2.70       13.51
+{txt}         16 {c |}{res}          4        5.41       18.92
+{txt}         17 {c |}{res}          4        5.41       24.32
+{txt}         18 {c |}{res}          9       12.16       36.49
+{txt}         19 {c |}{res}          8       10.81       47.30
+{txt}         20 {c |}{res}          3        4.05       51.35
+{txt}         21 {c |}{res}          5        6.76       58.11
+{txt}         22 {c |}{res}          5        6.76       64.86
+{txt}         23 {c |}{res}          3        4.05       68.92
+{txt}         24 {c |}{res}          4        5.41       74.32
+{txt}         25 {c |}{res}          5        6.76       81.08
+{txt}         26 {c |}{res}          3        4.05       85.14
+{txt}         28 {c |}{res}          3        4.05       89.19
+{txt}         29 {c |}{res}          1        1.35       90.54
+{txt}         30 {c |}{res}          2        2.70       93.24
+{txt}         31 {c |}{res}          1        1.35       94.59
+{txt}         34 {c |}{res}          1        1.35       95.95
+{txt}         35 {c |}{res}          2        2.70       98.65
+{txt}         41 {c |}{res}          1        1.35      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}         74      100.00
+{txt}
+{com}. list make price mpg
+{txt}
+     {c TLC}{hline 19}{c -}{hline 8}{c -}{hline 5}{c TRC}
+     {c |} {res}make                 price   mpg {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+  1. {c |} {res}AMC Concord          4,099    22 {txt}{c |}
+  2. {c |} {res}AMC Pacer            4,749    17 {txt}{c |}
+  3. {c |} {res}AMC Spirit           3,799    22 {txt}{c |}
+  4. {c |} {res}Buick Century        4,816    20 {txt}{c |}
+  5. {c |} {res}Buick Electra        7,827    15 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+  6. {c |} {res}Buick LeSabre        5,788    18 {txt}{c |}
+  7. {c |} {res}Buick Opel           4,453    26 {txt}{c |}
+  8. {c |} {res}Buick Regal          5,189    20 {txt}{c |}
+  9. {c |} {res}Buick Riviera       10,372    16 {txt}{c |}
+ 10. {c |} {res}Buick Skylark        4,082    19 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 11. {c |} {res}Cad. Deville        11,385    14 {txt}{c |}
+ 12. {c |} {res}Cad. Eldorado       14,500    14 {txt}{c |}
+ 13. {c |} {res}Cad. Seville        15,906    21 {txt}{c |}
+ 14. {c |} {res}Chev. Chevette       3,299    29 {txt}{c |}
+ 15. {c |} {res}Chev. Impala         5,705    16 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 16. {c |} {res}Chev. Malibu         4,504    22 {txt}{c |}
+ 17. {c |} {res}Chev. Monte Carlo    5,104    22 {txt}{c |}
+ 18. {c |} {res}Chev. Monza          3,667    24 {txt}{c |}
+ 19. {c |} {res}Chev. Nova           3,955    19 {txt}{c |}
+ 20. {c |} {res}Dodge Colt           3,984    30 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 21. {c |} {res}Dodge Diplomat       4,010    18 {txt}{c |}
+ 22. {c |} {res}Dodge Magnum         5,886    16 {txt}{c |}
+ 23. {c |} {res}Dodge St. Regis      6,342    17 {txt}{c |}
+ 24. {c |} {res}Ford Fiesta          4,389    28 {txt}{c |}
+ 25. {c |} {res}Ford Mustang         4,187    21 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 26. {c |} {res}Linc. Continental   11,497    12 {txt}{c |}
+ 27. {c |} {res}Linc. Mark V        13,594    12 {txt}{c |}
+ 28. {c |} {res}Linc. Versailles    13,466    14 {txt}{c |}
+ 29. {c |} {res}Merc. Bobcat         3,829    22 {txt}{c |}
+ 30. {c |} {res}Merc. Cougar         5,379    14 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 31. {c |} {res}Merc. Marquis        6,165    15 {txt}{c |}
+ 32. {c |} {res}Merc. Monarch        4,516    18 {txt}{c |}
+ 33. {c |} {res}Merc. XR-7           6,303    14 {txt}{c |}
+ 34. {c |} {res}Merc. Zephyr         3,291    20 {txt}{c |}
+ 35. {c |} {res}Olds 98              8,814    21 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 36. {c |} {res}Olds Cutl Supr       5,172    19 {txt}{c |}
+ 37. {c |} {res}Olds Cutlass         4,733    19 {txt}{c |}
+ 38. {c |} {res}Olds Delta 88        4,890    18 {txt}{c |}
+ 39. {c |} {res}Olds Omega           4,181    19 {txt}{c |}
+ 40. {c |} {res}Olds Starfire        4,195    24 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 41. {c |} {res}Olds Toronado       10,371    16 {txt}{c |}
+ 42. {c |} {res}Plym. Arrow          4,647    28 {txt}{c |}
+ 43. {c |} {res}Plym. Champ          4,425    34 {txt}{c |}
+ 44. {c |} {res}Plym. Horizon        4,482    25 {txt}{c |}
+ 45. {c |} {res}Plym. Sapporo        6,486    26 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 46. {c |} {res}Plym. Volare         4,060    18 {txt}{c |}
+ 47. {c |} {res}Pont. Catalina       5,798    18 {txt}{c |}
+ 48. {c |} {res}Pont. Firebird       4,934    18 {txt}{c |}
+ 49. {c |} {res}Pont. Grand Prix     5,222    19 {txt}{c |}
+ 50. {c |} {res}Pont. Le Mans        4,723    19 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 51. {c |} {res}Pont. Phoenix        4,424    19 {txt}{c |}
+ 52. {c |} {res}Pont. Sunbird        4,172    24 {txt}{c |}
+ 53. {c |} {res}Audi 5000            9,690    17 {txt}{c |}
+ 54. {c |} {res}Audi Fox             6,295    23 {txt}{c |}
+ 55. {c |} {res}BMW 320i             9,735    25 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 56. {c |} {res}Datsun 200           6,229    23 {txt}{c |}
+ 57. {c |} {res}Datsun 210           4,589    35 {txt}{c |}
+ 58. {c |} {res}Datsun 510           5,079    24 {txt}{c |}
+ 59. {c |} {res}Datsun 810           8,129    21 {txt}{c |}
+ 60. {c |} {res}Fiat Strada          4,296    21 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 61. {c |} {res}Honda Accord         5,799    25 {txt}{c |}
+ 62. {c |} {res}Honda Civic          4,499    28 {txt}{c |}
+ 63. {c |} {res}Mazda GLC            3,995    30 {txt}{c |}
+ 64. {c |} {res}Peugeot 604         12,990    14 {txt}{c |}
+ 65. {c |} {res}Renault Le Car       3,895    26 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 66. {c |} {res}Subaru               3,798    35 {txt}{c |}
+ 67. {c |} {res}Toyota Celica        5,899    18 {txt}{c |}
+ 68. {c |} {res}Toyota Corolla       3,748    31 {txt}{c |}
+ 69. {c |} {res}Toyota Corona        5,719    18 {txt}{c |}
+ 70. {c |} {res}VW Dasher            7,140    23 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c -}{hline 5}{c RT}
+ 71. {c |} {res}VW Diesel            5,397    41 {txt}{c |}
+ 72. {c |} {res}VW Rabbit            4,697    25 {txt}{c |}
+ 73. {c |} {res}VW Scirocco          6,850    25 {txt}{c |}
+ 74. {c |} {res}Volvo 260           11,995    17 {txt}{c |}
+     {c BLC}{hline 19}{c -}{hline 8}{c -}{hline 5}{c BRC}
+
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst/03-pm-computing/comparative/stata/testlog.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 4 Jan 2020, 10:02:35
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

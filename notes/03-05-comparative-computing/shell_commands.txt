@@ -1,0 +1,15 @@
+
+** These shell commands won't work on your machines because the files/file paths don't exist (and you don't have the login information for Dataverse). The commands are intended as blueprints to be adapted for your files/file paths **
+
+* Transfer folder 'predict' from the local to the remote machine (requires password afterwards)
+scp -r ~/Insync/predict simonheuberger@fn2187.american.edu:~/predict
+
+* Run 'r_predict.R' without hangup, i.e. the file will continue when the shell is closed
+nohup R CMD BATCH r_predict.R >/dev/null 2>&1 &
+
+* Same thing for 'py_predict.py'
+nohup python3 py_predict.py > file.output &
+
+* Download a password-protected file from the Dataverse website. The API is not needed when the file is not password-protected
+wget -O figures.zip --header '<Dataverse API>' <Dataverse web link>
+
