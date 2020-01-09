@@ -15,8 +15,8 @@ train <- ir_data[samp, ]
 test <- ir_data[-samp, ]
 
 # save for use in Python
-write.csv(train, file = "train.csv")
-write.csv(test, file = "test.csv")
+write.csv(train, file = "../../../data/train.csv")
+write.csv(test, file = "../../../data/test.csv")
 
 # fit model
 y <-train$Species

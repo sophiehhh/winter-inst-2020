@@ -1,16 +1,16 @@
 {smcl}
-{com}{sf}{ul off}{txt}{.-}
+{txt}{sf}{ul off}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst/03-pm-computing/comparative/stata/testlog.smcl
+       {txt}log:  {res}/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst-2020/notes/03-05-comparative-computing/stata/testlog.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res} 4 Jan 2020, 10:02:35
+ {txt}opened on:  {res} 9 Jan 2020, 11:46:33
 {txt}
 {com}. 
-. cd "/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst/03-pm-computing/comparative/stata"
-{res}/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst/03-pm-computing/comparative/stata
+. * cd to the /data folder on your local machine
+. cd "/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst-2020/data"
+{res}/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst-2020/data
 {txt}
-{com}. 
-. use auto
+{com}. use auto
 {txt}(1978 Automobile Data)
 
 {com}. describe
@@ -184,9 +184,9 @@ Sorted by: {res}foreign
 {com}. 
 . log close
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst/03-pm-computing/comparative/stata/testlog.smcl
+       {txt}log:  {res}/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst-2020/notes/03-05-comparative-computing/stata/testlog.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res} 4 Jan 2020, 10:02:35
+ {txt}closed on:  {res} 9 Jan 2020, 11:46:33
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

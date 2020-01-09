@@ -3,8 +3,8 @@ import os
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix
 
-# Set your working directory to the /predict folder on your machine
-os.chdir("/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst/03-pm-computing/comparative/predict")
+# Set your working directory to the /data folder on your local machine
+os.chdir("/Users/simonheuberger/Insync/Google Drive/data_science_center/winter_inst/winter-inst-2020/data")
 
 # load data
 traindf = pd.read_csv("train.csv")
