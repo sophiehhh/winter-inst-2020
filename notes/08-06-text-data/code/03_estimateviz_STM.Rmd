@@ -1,0 +1,181 @@
+---
+title: "03_estimateviz_STM.Rmd"
+author: "Rebecca Johnson (raj2@princeton.edu)"
+date: "1/9/2020"
+output: html_document
+---
+
+
+# 0. Load packages and graphing theme
+
+```{r}
+## Load packages
+library(dplyr)
+library(data.table)
+library(stm)
+library(ggplot2)
+library(lubridate)
+library(here)
+library(tm)
+theme_new <- function(base_size = 16, base_family = "Helvetica"){
+  theme_bw(base_size = base_size, base_family = base_family) %+replace%
+    theme(
+      panel.grid = element_blank(),   
+      panel.border = element_rect(fill = NA, colour = "black", size=1),
+      panel.background = element_rect(fill = "white", colour = "black"), 
+      strip.background = element_rect(fill = NA),
+      axis.text.x = element_text(color = "black"),
+      axis.text.y = element_text(color = "black")
+    )
+}
+
+
+
+```
+
+
+
+## Read in the data_preprocess you created before creating the DTM in python and run the preprocessing code
+
+
+
+```{r}
+df_frompy = read.csv("../intermediate_objects/data_preprocess.csv")
+dim(df_frompy)
+
+
+processed_hearings = textProcessor(documents = df_frompy$text_preprocess, 
+                                metadata = df_frompy %>% dplyr::select(-text_preprocess),
+                                
+                                ## cleaning args;
+                                ## by default, set to true
+                                ## deviating from default and setting to false
+                                ## because we already preprocessed
+                                lowercase = FALSE,
+                              removestopwords = FALSE, 
+                              removenumbers = FALSE,
+                            removepunctuation = FALSE, stem = FALSE,
+                                verbose = TRUE)
+
+print(class(processed_hearings))
+
+## results in three outputs
+hearing_docs = processed_hearings$documents
+hearing_vocab = processed_hearings$vocab
+head(hearing_vocab)
+hearing_meta = processed_hearings$meta
+head(hearing_meta)
+
+## plot number of focuments we'd remove at diff filtering thresholds
+## plot at different thresholds for minum number of ocuments
+plotRemoved(hearing_docs,
+            lower.thres = seq(from = 1, to = 50, by = 1))
+
+prep_formodel = prepDocuments(hearing_docs, hearing_vocab, 
+                              hearing_meta, lower.thres = 10, 
+                              upper.thres = dim(df_frompy)[0]-10)
+
+
+
+### estimate model, making sure to set a seed
+case_fixk_varymodel = selectModel(prep_formodel$documents,
+                                  prep_formodel$vocab,
+                                  K = 10,
+                                  prevalence = ~parent_cat + month + factor(year),
+                                  data = prep_formodel$meta,
+                                  runs = 10,
+                                  seed = 19840404) # low value and should increase
+plotModels(case_fixk_varymodel)
+selected_model = case_fixk_varymodel$runout[[2]]
+summary(selected_model)
+
+
+```
+
+## Get correlation between attributes and topic prevalence
+
+```{r}
+relate_attributes = estimateEffect(1:10 ~ parent_cat + month + factor(year),
+                meta = prep_formodel$meta, 
+                stmobj = selected_model,
+                uncertainty = "Global")
+
+
+## look at results 
+summary(relate_attributes)
+
+```
+
+
+## Visualize results
+
+
+Recommend tidystm over built-in plotting functions
+
+```{r}
+devtools::install_github("mikaelpoul/tidystm", dependencies = TRUE)
+library(tidystm)  
+
+
+parentcat_forplot = extract.estimateEffect(x = relate_attributes,
+                         covariate = "parent_cat",
+                         method = "difference",
+                         labeltype = "frex",
+                         model = selected_model,
+                         cov.value1 = "neither_parent",
+                         cov.value2 = "both_parents")
+
+parentcat_forplot
+
+
+## order values of covariate by estimate size
+shorter_labels_list = sapply(as.character(parentcat_forplot$label),
+                      strsplit, ",") 
+shorter_labels_variable = sprintf("%s;%s;%s;%s",lapply(shorter_labels_list, 
+                                              "[", 1),
+                                  lapply(shorter_labels_list, 
+                                         "[", 2),
+                                  lapply(shorter_labels_list, 
+                                         "[", 3),
+                                  lapply(shorter_labels_list, 
+                                         "[", 4))
+parentcat_forplot = parentcat_forplot %>%
+              mutate(clean_label = shorter_labels_variable,
+                ordered_label = factor(clean_label,
+                                       levels=unique(clean_label[order(estimate)]), 
+                                       ordered=TRUE))
+
+## get finer grained by
+## estimating topics within
+saveRDS(parentcat_forplot,
+        "../intermediate_objects/parent_v_topic.RDS")
+
+## completed plot
+## specify that it's the frex measure
+## 
+ggplot(parentcat_forplot, aes(x = ordered_label, 
+                                  y = estimate,
+                                  group = ordered_label,
+                                  color = ordered_label)) +
+  geom_point(size = 6) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = 'wheat4') +
+  geom_errorbar(aes(ymin = ci.lower,
+                    ymax = ci.upper),
+                width = 0.6,
+                lwd = 2) +
+  ylab('Estimated topic prevalence and 95% CI\n(Positive = higher prevalence in complaints filed by both parents;\n relative to neither parent)') +
+  xlab('') +
+  theme_new(base_size = 24) +
+  theme(axis.text.y   = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position = c(0.8, 0.3),
+        legend.background = element_blank()) +
+  labs(color = "") +
+  coord_flip() +
+  scale_color_brewer(palette = "RdYlGn",
+                     direction = -1)
+
+
+
+
+```

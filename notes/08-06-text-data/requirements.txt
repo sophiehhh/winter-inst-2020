@@ -1,0 +1,11 @@
+pandas==0.22.0
+requests==2.19.1
+nltk==3.2.5
+gensim==3.6.0
+pdfminer2==20151206
+numpy==1.15.2
+ipython==7.11.1
+beautifulsoup4==4.8.2
+pdfminer==20191125
+pyLDAvis==2.1.2
+scikit_learn==0.22.1
