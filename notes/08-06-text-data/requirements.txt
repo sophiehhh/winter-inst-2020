@@ -1,5 +1,5 @@
 pandas==0.22.0
-requests==2.19.1
+requests==2.20.0
 nltk==3.2.5
 gensim==3.6.0
 pdfminer2==20151206
